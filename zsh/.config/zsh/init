@@ -1,0 +1,12 @@
+# Activate tools for Zsh
+[[ -x "$(command -v mise)" ]] && eval "$(mise activate zsh)"
+[[ -x "$(command -v starship)" ]] && eval "$(starship init zsh)"
+[[ -x "$(command -v zoxide)" ]] && eval "$(zoxide init zsh)"
+[[ -x "$(command -v try)" ]] && eval "$(try init ~/Work/tries)"
+
+# FZF Zsh bindings
+if [[ -f /usr/share/fzf/completion.zsh ]]; then
+  source /usr/share/fzf/completion.zsh
+elif [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
+  source /usr/share/fzf/key-bindings.zsh
+fi

@@ -1,0 +1,29 @@
+# Ensure the Zsh Line Editor is in emacs mode (standard for most)
+bindkey -e
+
+# Arrow keys match history
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search
+
+# Standard keys
+bindkey "^[[3~" delete-char
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+bindkey "^[[5~" beginning-of-history
+bindkey "^[[6~" end-of-history
+
+# Ctrl + Left/Right to jump words
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+# Backspace/Ctrl+H behavior
+bindkey '^H' backward-kill-word
+
+# Completion Styling
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' fzf-search-display true
+
+# Shell behavior
+setopt MARK_DIRS

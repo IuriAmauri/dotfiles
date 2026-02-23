@@ -1,0 +1,140 @@
+{
+  "cpu": {
+    "interval": 5,
+    "format": "{usage}% 󰍛",
+    "on-click": "omarchy-launch-or-focus-tui btop",
+    "tooltip-format": "CPU: {usage}%\nLoad: {load}"
+  },
+  "clock": {
+    "format": "{:%H:%M}",
+    "format-alt": "{:%A, %d %B %Y}",
+    "tooltip": false,
+    "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select",
+  },
+  "memory": {
+    "interval": 5,
+    "format": "  {percentage}%",
+    "on-click": "omarchy-launch-or-focus-tui btop",
+    "tooltip-format": "Memory: {used:0.1f}G / {total:0.1f}G ({percentage}%)\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G"
+  },
+  "network": {
+    "format-icons": [
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤥",
+      "󰤨"
+    ],
+    "format": "{icon}",
+    "format-wifi": "{icon}",
+    "format-ethernet": "{ifname} 󰀂",
+    "format-disconnected": "󰖪",
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)\nIP: {ipaddr}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-ethernet": "IP: {ipaddr}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Disconnected",
+    "interval": 3,
+    "nospacing": 1,
+    "on-click": "ghostty --class=Impala -e impala",
+    "on-click-right": "nm-connection-editor"
+  },
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-discharging": "{icon}",
+    "format-charging": "{icon}",
+    "format-icons": {
+      "charging": [
+        "󰢜",
+        "󰂆",
+        "󰂇",
+        "󰂈",
+        "󰢝",
+        "󰂉",
+        "󰢞",
+        "󰂊",
+        "󰂋",
+        "󰂅"
+      ],
+      "default": [
+        "󰁺",
+        "󰁻",
+        "󰁼",
+        "󰁽",
+        "󰁾",
+        "󰁿",
+        "󰂀",
+        "󰂁",
+        "󰂂",
+        "󰁹"
+      ]
+    },
+    "format-full": "󰂅",
+    "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%\nTime remaining: {time}",
+    "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%\nTime until full: {time}",
+    "tooltip-format-full": "Full ({capacity}%)",
+    "interval": 5,
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "on-click": "omarchy-menu power"
+  },
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "󰂲",
+    "format-connected": "",
+    "tooltip-format": "Devices connected: {num_connections}",
+    "on-click": "omarchy-launch-bluetooth"
+  },
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-muted": "󰝟 {volume}%",
+    "on-click": "ghostty --class=Wiremix -e wiremix",
+    "on-click-right": "omarchy-launch-or-focus-tui wiremix",
+    "on-click-middle": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "tooltip-format": "{volume}% | {format_source}",
+    "tooltip-format-muted": "Muted ({volume}%)",
+    "scroll-step": 5,
+    "format-icons": {
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+  "group/tray-expander": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 600,
+      "children-class": "tray-group-item"
+    },
+    "modules": [
+      "custom/expand-icon",
+      "tray",
+      "bluetooth",
+      "custom/vpn"
+    ]
+  },
+  "custom/expand-icon": {
+    "format": " ",
+    "tooltip": false
+  },
+  "tray": {
+    "icon-size": 12,
+    "spacing": 12
+  },
+  "disk": {
+    "interval": 60,
+    "format": "󰋊 {percentage_used}%",
+    "format-warning": "󰋊 {percentage_used}%",
+    "format-critical": "󰋊 {percentage_used}%",
+    "path": "/",
+    "tooltip-format": "Disk: {used} / {total} ({percentage_used}%)\nFree: {free}",
+    "on-click": "omarchy-launch-or-focus-tui btop",
+    "states": {
+      "warning": 80,
+      "critical": 90
+    }
+  }
+}
+

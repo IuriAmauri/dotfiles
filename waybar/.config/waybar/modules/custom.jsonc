@@ -1,0 +1,55 @@
+{
+  "custom/update": {
+    "format": "",
+    "exec": "omarchy-update-available",
+    "on-click": "omarchy-launch-floating-terminal-with-presentation omarchy-update",
+    "signal": 7,
+    "interval": 21600
+  },
+  "custom/netspeed": {
+    "exec": "~/.config/waybar/net_speed.sh",
+    "interval": 10,
+    "format": "{}",
+    "tooltip-format": "Network Speed\nClick to open network manager",
+    "on-click": "ghostty --class=Impala -e impala"
+  },
+  "custom/vpn": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 5,
+    "exec": "~/.config/waybar/vpn.sh",
+    "on-click": "sudo wg-quick up Iuri",
+    "on-click-right": "sudo wg-quick down Iuri",
+    "tooltip": true
+  },
+  "custom/weather": {
+	"format": "{}°",
+	"tooltip": true,
+	"interval": 300,
+	"exec": "wttrbar --nerd --location 'Sainte Anne de Beaupre'",
+	"return-type": "json",
+	"on-click": "notify-send 'Weather' \"$(curl -s 'wttr.in/Sainte%20Anne%20de%20Beaupre?format=%l:\\n🌡️+%t+%C\\n💧+Humidity:+%h\\n🌬️+Wind:+%w')\""
+  },
+  "custom/calendar": {
+	"format": "{}",
+	"exec": "~/.config/waybar/calendar.sh",
+	"return-type": "json",
+	"interval": 600,
+	"tooltip": true,
+	"min-length": 6,
+  },
+  "custom/media": {
+    "format": "{icon} <span>{text}</span>",
+    "return-type": "json",
+    "max-length": 50,
+    "interval": 1,
+    "exec": "python3 $HOME/.config/waybar/media.py",
+    "format-icons": {
+        "Playing": "󰎆",
+        "Paused": "󰏤"
+    },
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  }
+}
