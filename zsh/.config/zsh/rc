@@ -1,8 +1,8 @@
 OM_ZSH="$HOME/.config/zsh"
 
-source "$OM_ZSH/envs"
 source "$OM_ZSH/shell"
 source "$OM_ZSH/aliases"
 source "$OM_ZSH/functions"
 source "$OM_ZSH/init"
+source "$OM_ZSH/envs"
 source "$OM_ZSH/inputrc"

@@ -1,0 +1,42 @@
+# SSH Port Forwarding Functions
+
+# Forward IP (Start forwarding)
+fip() {
+  if (( $# < 2 )); then
+    echo "Usage: fip <host> <port1> [port2] ..."
+    return 1
+  fi
+
+  local host="$1"
+  shift
+
+  # Zsh handles "$@" correctly without word splitting issues
+  for port in "$@"; do
+    if ssh -f -N -L "$port:localhost:$port" "$host"; then
+      echo "Forwarding localhost:$port -> $host:$port"
+    else
+      echo "Failed to forward port $port"
+    fi
+  done
+}
+
+# Disconnect IP (Stop forwarding)
+dip() {
+  if (( $# == 0 )); then
+    echo "Usage: dip <port1> [port2] ..."
+    return 1
+  fi
+
+  for port in "$@"; do
+    # pkill behavior is identical, but we use Zsh's || logic
+    pkill -f "ssh.*-L $port:localhost:$port" && \
+      echo "Stopped forwarding port $port" || \
+      echo "No forwarding found on port $port"
+  done
+}
+
+# List IP (Show active forwards)
+lip() {
+  # pgrep works the same; Zsh will display the output of pgrep -af
+  pgrep -af "ssh.*-L [0-9]+:localhost:[0-9]+" || echo "No active forwards"
+}

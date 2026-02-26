@@ -187,3 +187,8 @@ window#waybar.hidden {
 #custom-vpn.connected {
     color: #a6e3a1;
 }
+
+#custom-idle-indicator.active,
+#custom-notification-silencing-indicator.active {
+  color: #a55555;
+}

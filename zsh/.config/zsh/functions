@@ -1,42 +1,6 @@
-# Compression
-compress() { tar -czf "${1%/}.tar.gz" "${1%/}"; }
-alias decompress="tar -xzf"
+OM_ZSH="$HOME/.config/zsh"
 
-# Write iso file to sd card
-iso2sd() {
-  if [ $# -ne 2 ]; then
-    echo "Usage: iso2sd <input_file> <output_device>"
-    echo "Example: iso2sd ~/Downloads/ubuntu.iso /dev/sda"
-    echo -e "\nAvailable SD cards:"
-    lsblk -d -o NAME | grep -E '^sd[a-z]' | awk '{print "/dev/"$1}'
-  else
-    sudo dd bs=4M status=progress oflag=sync if="$1" of="$2"
-    sudo eject $2
-  fi
-}
+for f in $OM_ZSH/fns/*(.); do
+  source "$f"
+done
 
-# Format an entire drive
-format-drive() {
-  if [ $# -ne 2 ]; then
-    echo "Usage: format-drive <device> <name>"
-    return 1
-  fi
-  
-  echo "WARNING: This will completely erase all data on $1 and label it '$2'."
-  read "confirm?Are you sure you want to continue? (y/N): "
-
-  if [[ "$confirm" =~ ^[Yy]$ ]]; then
-    sudo wipefs -a "$1"
-    sudo dd if=/dev/zero of="$1" bs=1M count=100 status=progress
-    sudo parted -s "$1" mklabel gpt
-    sudo parted -s "$1" mkpart primary 1MiB 100%
-    partition="$([[ $1 == *"nvme"* ]] && echo "${1}p1" || echo "${1}1")"
-    sudo partprobe "$1" || true
-    sudo udevadm settle || true
-    sudo mkfs.exfat -n "$2" "$partition"
-    echo "Drive $1 formatted as exFAT and labeled '$2'."
-  fi
-}
-
-transcode-video-1080p() { ffmpeg -i $1 -vf scale=1920:1080 -c:v libx264 -preset fast -crf 23 -c:a copy ${1%.*}-1080p.mp4 }
-img2jpg() { img="$1"; shift; magick "$img" $@ -quality 95 -strip ${img%.*}-optimized.jpg }
