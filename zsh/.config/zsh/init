@@ -1,12 +1,20 @@
-# Activate tools for Zsh
+# 1. Tools first
 [[ -x "$(command -v mise)" ]] && eval "$(mise activate zsh)"
-[[ -x "$(command -v starship)" ]] && eval "$(starship init zsh)"
 [[ -x "$(command -v zoxide)" ]] && eval "$(zoxide init zsh)"
 [[ -x "$(command -v try)" ]] && eval "$(try init ~/Work/tries)"
 
-# FZF Zsh bindings
+# 2. FZF Bindings (Fixed the 'f' to 'fi')
 if [[ -f /usr/share/fzf/completion.zsh ]]; then
   source /usr/share/fzf/completion.zsh
-elif [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
+fi
+if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
   source /usr/share/fzf/key-bindings.zsh
+fi
+
+# 3. Prompt Sanitizer & Starship LAST
+if command -v starship &> /dev/null; then
+  __sanitize_prompt() { printf '\r\033[K'; }
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd __sanitize_prompt
+  eval "$(starship init zsh)"
 fi

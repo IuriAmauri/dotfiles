@@ -1,4 +1,3 @@
-# Create a Tmux Dev Layout with editor, ai, and terminal
 tdl() {
   if [[ -z $1 ]]; then
     echo "Usage: tdl <c|cx|codex|other_ai> [<second_ai>]"
@@ -13,17 +12,32 @@ tdl() {
 
   editor_pane="$TMUX_PANE"
 
+  # 1. Rename the window
   tmux rename-window -t "$editor_pane" "$(basename "$current_dir")"
-  tmux split-window -v -p 15 -t "$editor_pane" -c "$current_dir"
-  ai_pane=$(tmux split-window -h -p 30 -t "$editor_pane" -c "$current_dir" -P -F '#{pane_id}')
 
+  # 2. Create bottom pane (Standard shell)
+  tmux split-window -v -p 15 -t "$editor_pane" -c "$current_dir"
+
+  # 3. Create AI pane and immediately run the AI command
+  # Using -d to split without moving focus
+  ai_pane=$(tmux split-window -h -p 30 -t "$editor_pane" -c "$current_dir" -P -F '#{pane_id}')
+  tmux send-keys -t "$ai_pane" "$ai" C-m
+
+  # 4. Handle second AI if provided
   if [[ -n $ai2 ]]; then
     ai2_pane=$(tmux split-window -v -t "$ai_pane" -c "$current_dir" -P -F '#{pane_id}')
     tmux send-keys -t "$ai2_pane" "$ai2" C-m
   fi
 
-  tmux send-keys -t "$ai_pane" "$ai" C-m
-  tmux send-keys -t "$editor_pane" "$EDITOR ." C-m
+  # 5. THE NUCLEAR FIX FOR THE EDITOR PANE:
+  # Instead of sending keys to the shell, we use 'respawn-pane' 
+  # to force the pane to run 'nvim .' directly. 
+  # This kills the 'zsh' process in this pane and replaces it with nvim,
+  # meaning no shell artifacts or "34" codes can interfere.
+  sleep 0.1
+  tmux respawn-pane -k -t "$editor_pane" -c "$current_dir" "nvim ."
+
+  # Finalize focus
   tmux select-pane -t "$editor_pane"
 }
 
@@ -74,11 +88,9 @@ tsl() {
 
   while (( ${#panes} < count )); do
     local new_pane
-    # Zsh: panes[-1] works for the last element
     local split_target="${panes[-1]}"
     new_pane=$(tmux split-window -h -t "$split_target" -c "$current_dir" -P -F '#{pane_id}')
     panes+=("$new_pane")
-    # Zsh array indexing starts at 1
     tmux select-layout -t "${panes[1]}" tiled
   done
 
