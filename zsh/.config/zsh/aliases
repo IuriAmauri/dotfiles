@@ -32,8 +32,10 @@ alias ....='cd ../../..'
 
 # Tools
 alias c='opencode'
+alias ag='auggie'
 alias d='docker'
 alias t='tmux attach || tmux new -s Work'
+alias tks='tmux kill-server'
 n() { if [ "$#" -eq 0 ]; then nvim .; else nvim "$@"; fi; }
 
 # Git
