@@ -4,9 +4,8 @@
     "custom/media"
   ],
   "modules-center": [
-  	"custom/calendar",
+    "custom/calendar",
     "clock",
-    "custom/weather",
     "custom/update"
   ],
   "modules-right": [

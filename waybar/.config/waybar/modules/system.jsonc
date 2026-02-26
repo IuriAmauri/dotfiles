@@ -9,7 +9,7 @@
     "format": "{:%H:%M}",
     "format-alt": "{:%A, %d %B %Y}",
     "tooltip": false,
-    "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select",
+    "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select"
   },
   "memory": {
     "interval": 5,
@@ -137,4 +137,3 @@
     }
   }
 }
-

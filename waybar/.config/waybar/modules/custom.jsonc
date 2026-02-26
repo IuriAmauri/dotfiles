@@ -22,21 +22,12 @@
     "on-click-right": "sudo wg-quick down Iuri",
     "tooltip": true
   },
-  "custom/weather": {
-	"format": "{}°",
-	"tooltip": true,
-	"interval": 300,
-	"exec": "wttrbar --nerd --location 'Sainte Anne de Beaupre'",
-	"return-type": "json",
-	"on-click": "notify-send 'Weather' \"$(curl -s 'wttr.in/Sainte%20Anne%20de%20Beaupre?format=%l:\\n🌡️+%t+%C\\n💧+Humidity:+%h\\n🌬️+Wind:+%w')\""
-  },
   "custom/calendar": {
-	"format": "{}",
-	"exec": "~/.config/waybar/calendar.sh",
-	"return-type": "json",
-	"interval": 600,
-	"tooltip": true,
-	"min-length": 6,
+    "format": "{}",
+    "exec": "~/.config/waybar/calendar.sh",
+    "return-type": "json",
+    "interval": 600,
+    "tooltip": true
   },
   "custom/media": {
     "format": "{icon} <span>{text}</span>",
@@ -45,8 +36,8 @@
     "interval": 1,
     "exec": "python3 $HOME/.config/waybar/media.py",
     "format-icons": {
-        "Playing": "󰎆",
-        "Paused": "󰏤"
+      "Playing": "󰎆",
+      "Paused": "󰏤"
     },
     "on-click": "playerctl play-pause",
     "on-scroll-up": "playerctl next",
