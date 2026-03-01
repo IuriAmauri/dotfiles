@@ -34,9 +34,15 @@ alias ....='cd ../../..'
 alias c='opencode'
 alias ag='auggie'
 alias d='docker'
-alias t='tmux attach || tmux new -s Work'
 alias tks='tmux kill-server'
 n() { if [ "$#" -eq 0 ]; then nvim .; else nvim "$@"; fi; }
+t() {
+  # Use the first argument if provided, otherwise default to "Work"
+  local session="${1:-Work}"
+  
+  # Try to attach, if that fails, create a new one with that name
+  tmux attach -t "$session" 2>/dev/null || tmux new -s "$session"
+}
 
 # Git
 alias lg='lazygit'

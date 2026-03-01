@@ -4,7 +4,6 @@
     "custom/media"
   ],
   "modules-center": [
-    "custom/calendar",
     "clock",
     "custom/update"
   ],

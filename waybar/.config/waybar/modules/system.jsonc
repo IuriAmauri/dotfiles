@@ -111,6 +111,7 @@
     "modules": [
       "custom/expand-icon",
       "tray",
+      "custom/calendar",
       "bluetooth",
       "custom/vpn"
     ]
