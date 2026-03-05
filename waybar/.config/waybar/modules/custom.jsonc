@@ -6,13 +6,6 @@
     "signal": 7,
     "interval": 21600
   },
-  "custom/netspeed": {
-    "exec": "~/.config/waybar/net_speed.sh",
-    "interval": 10,
-    "format": "{}",
-    "tooltip-format": "Network Speed\nClick to open network manager",
-    "on-click": "ghostty --class=Impala -e impala"
-  },
   "custom/vpn": {
     "format": "{}",
     "return-type": "json",
@@ -20,13 +13,6 @@
     "exec": "~/.config/waybar/vpn.sh",
     "on-click": "sudo wg-quick up Iuri",
     "on-click-right": "sudo wg-quick down Iuri",
-    "tooltip": true
-  },
-  "custom/calendar": {
-    "format": "{}",
-    "exec": "~/.config/waybar/calendar.sh",
-    "return-type": "json",
-    "interval": 600,
     "tooltip": true
   },
   "custom/media": {
