@@ -1,6 +1,6 @@
 {
   "hyprland/workspaces": {
-    "all-outputs": false,
+    // "all-outputs": false,
     "active-only": false,
     "on-click": "activate",
     "format": "{icon}",
@@ -27,6 +27,13 @@
       "30": "0"
     },
     "persistent-workspaces": {
+      "eDP-1": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
       "HDMI-A-1": [
         "11",
         "12",
