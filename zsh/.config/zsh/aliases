@@ -46,3 +46,13 @@ t() {
 
 # Git
 alias lg='lazygit'
+
+# Media server
+media() {
+    local action=$1
+    if [[ "$action" == "start" || "$action" == "stop" || "$action" == "status" ]]; then
+        sudo systemctl "$action" jellyfin sonarr bazarr radarr --no-pager
+    else
+        echo "Usage: media [start|stop|status]"
+    fi
+}
