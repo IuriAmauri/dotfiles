@@ -35,7 +35,21 @@ alias c='opencode'
 alias ag='auggie'
 alias d='docker'
 alias tks='tmux kill-server'
-n() { if [ "$#" -eq 0 ]; then nvim .; else nvim "$@"; fi; }
+n() {
+  # 1. Handle the "no arguments" case (open current directory)
+  if [ "$#" -eq 0 ]; then
+    nvim .
+    return
+  fi
+
+  # 2. Check if the file is NOT writable. 
+  # If it doesn't exist yet, check if the parent directory is NOT writable.
+  if [[ ( -f "$1" && ! -w "$1" ) || ( ! -f "$1" && ! -w "${1%/*}" ) ]]; then
+    sudoedit "$@"
+  else
+    nvim "$@"
+  fi
+}
 t() {
   # Use the first argument if provided, otherwise default to "Work"
   local session="${1:-Work}"
@@ -43,6 +57,9 @@ t() {
   # Try to attach, if that fails, create a new one with that name
   tmux attach -t "$session" 2>/dev/null || tmux new -s "$session"
 }
+
+# Sudo nvim
+alias snvim='sudo -e'
 
 # Git
 alias lg='lazygit'
