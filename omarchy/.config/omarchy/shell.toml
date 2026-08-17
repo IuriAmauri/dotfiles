@@ -1,0 +1,6 @@
+# Machine-level overrides. These win over the active theme's shell.toml,
+# so they survive theme switches.
+
+[bar]
+# Bar thickness (height for a top/bottom bar). Stock default is 26.
+size-horizontal = 32

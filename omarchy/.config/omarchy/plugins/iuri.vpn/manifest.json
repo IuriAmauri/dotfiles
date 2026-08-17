@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "iuri.vpn",
+  "name": "VPN",
+  "version": "1.0.0",
+  "author": "Iuri",
+  "description": "WireGuard VPN status and toggle",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Widget.qml"
+  },
+  "barWidget": {
+    "displayName": "VPN",
+    "description": "WireGuard status; click to toggle",
+    "category": "Network",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}

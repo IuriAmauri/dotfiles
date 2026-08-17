@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "iuri.sysmon",
+  "name": "System Monitor",
+  "version": "1.0.0",
+  "author": "Iuri",
+  "description": "CPU, memory and disk usage",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Widget.qml"
+  },
+  "barWidget": {
+    "displayName": "System Monitor",
+    "description": "CPU, memory and disk usage; click for btop",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
