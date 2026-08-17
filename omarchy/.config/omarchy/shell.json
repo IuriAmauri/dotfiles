@@ -32,6 +32,9 @@
           "id": "iuri.vpn"
         },
         {
+          "id": "shavanced.notification-center"
+        },
+        {
           "id": "omarchy.bluetooth"
         },
         {
@@ -42,6 +45,9 @@
         },
         {
           "id": "omarchy.monitor"
+        },
+        {
+          "id": "im0001gt.hw-tooltip"
         },
         {
           "id": "omarchy.power"
