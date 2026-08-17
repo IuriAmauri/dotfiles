@@ -1,1 +1,3 @@
 hypr/.config/hypr/hyprsplit/
+omarchy/.config/omarchy/plugins/*
+!omarchy/.config/omarchy/plugins/iuri.*
