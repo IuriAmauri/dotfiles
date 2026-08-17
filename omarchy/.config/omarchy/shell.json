@@ -32,9 +32,6 @@
           "id": "iuri.vpn"
         },
         {
-          "id": "omarchy.agents"
-        },
-        {
           "id": "omarchy.bluetooth"
         },
         {
@@ -48,12 +45,6 @@
         },
         {
           "id": "omarchy.power"
-        },
-        {
-          "id": "iuri.sysmon"
-        },
-        {
-          "id": "omarchy.keyboard-layout"
         }
       ]
     },
