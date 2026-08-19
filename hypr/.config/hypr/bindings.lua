@@ -7,6 +7,10 @@ o.bind("SUPER + SHIFT + V", "Vi Mongo", "uwsm-app -- xdg-terminal-exec vi-mongo"
 o.bind("SUPER + SHIFT + G", "Git", { tui = "lazygit" })
 o.bind("SUPER + SHIFT + C", "VS Code", { launch = "code" })
 
+-- Treat VS Code as a terminal so SUPER+C/V send Ctrl/Shift+Insert (works in
+-- editor and integrated terminal) instead of Ctrl+C/V (SIGINT in terminal).
+o.window("code", { tag = "+terminal" })
+
 local hs = dofile(os.getenv("HOME") .. "/.config/hypr/hyprsplit/init.lua")
 
 local ACER = "Acer Technologies X32 V2 15380001D3900"
