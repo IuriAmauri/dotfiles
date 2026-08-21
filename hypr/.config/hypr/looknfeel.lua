@@ -8,3 +8,5 @@ hl.config({
     rounding = 5,
   },
 })
+
+o.window(".*", { opacity = "0.995 0.95" })
