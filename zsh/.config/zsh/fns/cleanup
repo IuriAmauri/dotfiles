@@ -1,0 +1,9 @@
+cleanup() {
+  echo "before: $(df -h / | awk 'NR==2 {print $3}') used"
+  docker builder prune -f
+  sudo paccache -rk1
+  sudo journalctl --vacuum-size=500M
+  rm -rf ~/.cache/pypoetry ~/.cache/yay
+  echo "after: $(df -h / | awk 'NR==2 {print $3}') used"
+  echo "if df didn't drop, old snapshots may pin the space: sudo snapper list"
+}

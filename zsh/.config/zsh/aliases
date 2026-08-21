@@ -7,6 +7,17 @@ if command -v eza &> /dev/null; then
 fi
 
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+alias eff='$EDITOR "$(ff)"'
+
+sff() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: sff <destination> (e.g. sff host:/tmp/)"
+    return 1
+  fi
+  local file
+  file=$(find . -type f -printf '%T@\t%p\n' | sort -rn | cut -f2- | ff) &&
+    [ -n "$file" ] && scp "$file" "$1"
+}
 
 if command -v zoxide &> /dev/null; then
   alias cd="zd"
@@ -31,7 +42,14 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # Tools
+alias a='omarchy-agent --inline'
+alias h='herdr'
 alias c='opencode'
+alias cx='printf "\033[2J\033[3J\033[H" && claude --permission-mode bypassPermissions'
+alias ic='tdl c'
+alias ix='tdl cx'
+alias icx='tdl c cx'
+alias mup='MISE_MINIMUM_RELEASE_AGE=0 mise up'
 alias ag='auggie'
 alias d='docker'
 alias tks='tmux kill-server'
@@ -62,6 +80,10 @@ t() {
 alias snvim='sudo -e'
 
 # Git
+alias g='git'
+alias gcm='git commit -m'
+alias gcam='git commit -a -m'
+alias gcad='git commit -a --amend'
 alias lg='lazygit'
 
 # Media server

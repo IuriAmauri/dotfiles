@@ -26,10 +26,6 @@
       ],
       "right": [
         {
-          "id": "tobiasz-p.next-event",
-          "icsUrl": "https://calendar.google.com/calendar/ical/iuri%40class8.com/private-f0f84d1a9cf8c617164f957da4f13888/basic.ics"
-        },
-        {
           "id": "omarchy.tray"
         },
         {
@@ -59,7 +55,7 @@
       ]
     },
     "position": "top",
-    "transparent": false
+    "transparent": true
   },
   "idle": {
     "lock": 300,
