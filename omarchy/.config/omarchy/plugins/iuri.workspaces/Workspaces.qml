@@ -9,9 +9,6 @@ BarWidget {
   id: root
   moduleName: "omarchy.workspaces"
 
-  // hyprsplit gives each monitor its own block of ten workspace ids
-  // (mon 1 -> 1-10, mon 2 -> 11-20, ...). The bar is built once per monitor,
-  // so each instance renders only its own block, labelled 1-9,0.
   readonly property var window: root.QsWindow.window
   readonly property var monitor: window && window.screen ? Hyprland.monitorFor(window.screen) : null
   readonly property int activeId: monitor && monitor.activeWorkspace ? monitor.activeWorkspace.id : 0
@@ -40,8 +37,6 @@ BarWidget {
     return ids
   }
 
-  // Focusing a workspace drags it onto whichever monitor is focused, so focus
-  // this bar's monitor first — same order as the hyprsplit keybinds.
   function focusWorkspace(id) {
     if (!root.bar || !root.monitor) return
     root.bar.run("hyprctl dispatch " + Util.shellQuote("hl.dsp.focus({ monitor = \"" + root.monitor.name + "\" })")
