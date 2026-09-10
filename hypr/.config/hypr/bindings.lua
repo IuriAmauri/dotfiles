@@ -81,3 +81,8 @@ for workspace = 1, 10 do
 		move_to_workspace(LAPTOP, workspace)
 	)
 end
+
+o.bind("SUPER + SHIFT + ESCAPE", "Away (black screen on Acer)", function()
+	hl.dispatch(hl.dsp.exec_cmd("omarchy-theme-bg-set ~/Pictures/Wallpapers/black.png; omarchy-toggle bar-off on; omarchy-shell -q omarchy.bar syncHidden"))
+	focus_workspace(ACER, 10)()
+end)
