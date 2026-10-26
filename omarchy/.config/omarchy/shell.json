@@ -22,9 +22,6 @@
       "left": [
         {
           "id": "iuri.workspaces"
-        },
-        {
-          "id": "omarchy.active-window"
         }
       ],
       "right": [
@@ -55,6 +52,9 @@
         },
         {
           "id": "omarchy.power"
+        },
+        {
+          "id": "omarchy.keyboard-layout"
         }
       ]
     },

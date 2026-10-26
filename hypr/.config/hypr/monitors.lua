@@ -1,5 +1,5 @@
-hl.monitor({ output = "eDP-2", mode = "2560x1600@240", position = "4800x0", scale = "auto" })
---hl.monitor({ output = "eDP-2", mode = "2560x1600@60", position = "4800x0", scale = "auto" })
+--hl.monitor({ output = "eDP-2", mode = "2560x1600@240", position = "4800x0", scale = "auto" })
+hl.monitor({ output = "eDP-2", mode = "2560x1600@60", position = "4800x0", scale = "auto" })
 
 -- LG UltraFine
 hl.monitor({

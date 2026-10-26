@@ -9,7 +9,7 @@ o.bind("SUPER + SHIFT + C", "VS Code", { launch = "code" })
 
 -- Treat VS Code as a terminal so SUPER+C/V send Ctrl/Shift+Insert (works in
 -- editor and integrated terminal) instead of Ctrl+C/V (SIGINT in terminal).
-o.window("code", { tag = "+terminal" })
+o.window("com.microsoft.VSCode", { tag = "+terminal" })
 
 local hs = dofile(os.getenv("HOME") .. "/.config/hypr/hyprsplit/init.lua")
 
@@ -21,14 +21,19 @@ hs.config({ num_workspaces = 10 })
 hs.monitor_priority({ ACER, LG, LAPTOP })
 
 -- nil when the monitor is off (closed lid) or unplugged, so its keys no-op
--- instead of hijacking whichever monitor happens to be focused.
+-- instead of hijacking whichever monitor happens to be focused. Exception: with
+-- a single monitor there is nothing to hijack, so every key targets it.
 local function monitor(selector)
+	local others = {}
 	for _, m in ipairs(hl.get_monitors()) do
-		if m.id ~= -1 and (m.name == selector or m.description == selector) then
-			return m
+		if m.id ~= -1 then
+			if m.name == selector or m.description == selector then
+				return m
+			end
+			others[#others + 1] = m
 		end
 	end
-	return nil
+	return #others == 1 and others[1] or nil
 end
 
 local function focus_workspace(selector, workspace)
@@ -83,6 +88,6 @@ for workspace = 1, 10 do
 end
 
 o.bind("SUPER + SHIFT + ESCAPE", "Away (black screen on Acer)", function()
-	hl.dispatch(hl.dsp.exec_cmd("omarchy-theme-bg-set ~/Pictures/Wallpapers/black.png; omarchy-toggle bar-off on; omarchy-shell -q omarchy.bar syncHidden"))
+	hl.dispatch(hl.dsp.exec_cmd("omarchy-theme-bg-set ~/.config/hypr/black.png; omarchy-toggle bar-off on; omarchy-shell -q omarchy.bar syncHidden"))
 	focus_workspace(ACER, 10)()
 end)
